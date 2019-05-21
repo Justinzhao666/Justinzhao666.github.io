@@ -1,0 +1,17 @@
+theme: suka
+title: Justin's Blog
+url: http://zhaohaoren.top
+suka_theme:
+  search:
+    enable: true
+    path: search.json
+    field: post # Page | Post | All. Default post
+  prism:
+    enable: false
+    line_number: true
+    theme: default
+
+deploy:
+    type: git
+    repository: https://github.com/Justinzhao666/Justinzhao666.github.io.git
+    branch: master
