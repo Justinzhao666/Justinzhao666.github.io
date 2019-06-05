@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html >
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+        Version: 1.3.2
+    -->
+    <script>
+window.lsVersion = "1.3.2",
+window.oldVersion = [
+    
+        
+            "0.2.0","0.0.1","0.1.0","1.0.0","1.0.1","1.1.0","1.1.1","1.2.0","1.3.0"
+        
+    
+]
+</script>
+
+    <!-- ### DNS Prefetch ### -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+
+    <!-- ### Preload ### -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<!-- Title -->
+<title>&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt; | Justin&#39;s Blog</title>
+
+<!-- favicon -->
+<!-- Favicons -->
+
+    <link rel="shortcut icon" type="image/ico" href="/img/suka-favicon.ico">
+
+
+
+
+
+
+<!-- Android Chrome Color -->
+
+
+
+<meta name="format-detection" content="telephone=no">
+
+<!-- Description -->
+<meta name="description" content="
+在读Java编程思想的时候，对泛型通配符的上下限定这块有点难以理解。其实平常我也没有用到过这个统配符，只是看着有点困惑便去网上搜了下，答案又各有说法，并且大都不是我想要的。泛型的优点就不多说了，作为一个编程语言的优秀特性，很多语言都支持泛型。在Java编码中泛型可以结合通配符来实现更多的扩展。
+">
+
+<!-- Keywords -->
+<meta name="keywords" content=", Java">
+
+<!-- Disable Fucking Bloody Baidu Tranformation -->
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+    <!-- ### Import File ### -->
+    
+        <!-- spectre.css -->
+
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css">
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style>
+
+<!-- style.css -->
+
+    <link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    
+        <link rel="stylesheet" href="/css/highlight/github.min.css">
+    
+
+
+
+    
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <!-- ### RSS ### -->
+    
+
+    <!-- ### WebApp ### -->
+    <meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Justin&#39;s Blog">
+<meta name="msapplication-starturl" content="http://zhaohaoren.top">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Justin&#39;s Blog">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Manifest Import -->
+
+<!-- Open Search -->
+
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt; | Justin&#39;s Blog">
+<meta property="og:site_name" content="Justin&#39;s Blog">
+
+
+
+<meta property="og:url" content="http://zhaohaoren.top/2019/06/05/Java-泛型通配符/">
+<meta property="og:image" content="http://zhaohaoren.top/img/suka-favicon.ico">
+
+<meta property="og:description" content="
+在读Java编程思想的时候，对泛型通配符的上下限定这块有点难以理解。其实平常我也没有用到过这个统配符，只是看着有点困惑便去网上搜了下，答案又各有说法，并且大都不是我想要的。泛型的优点就不多说了，作为一个编程语言的优秀特性，很多语言都支持泛型。在Java编码中泛型可以结合通配符来实现更多的扩展。
+">
+
+<meta name="twitter:card" content="summary">
+
+
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-06-05T11:53:29.000Z">
+    <meta property="article:modified_time" content="2019-06-05T11:53:29.000Z">
+    <meta property="article:author" content="John Doe">
+    <meta property="og:article:tag" content=", Java"> 
+
+
+
+
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://zhaohaoren.top/2019/06/05/Java-泛型通配符/">
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://zhaohaoren.top/2019/06/05/Java-泛型通配符/",
+    "@type": "BlogPosting",
+    "logo": "http://zhaohaoren.top/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://zhaohaoren.top/2019/06/05/Java-泛型通配符/"
+    },
+    "headline": "&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt; | Justin&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://zhaohaoren.top/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2019-06-05T11:53:29.000Z",
+    "dateModified": "2019-06-05T12:39:55.655Z",
+    "author": {
+        "@type": "Person",
+        "name": "John Doe",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://zhaohaoren.top/img/default_avatar.png"
+        },
+        "description": "Stay Hungry & Stay Foolish"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Justin&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://zhaohaoren.top/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://zhaohaoren.top/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": ", Java",
+    "description": "
+在读Java编程思想的时候，对泛型通配符的上下限定这块有点难以理解。其实平常我也没有用到过这个统配符，只是看着有点困惑便去网上搜了下，答案又各有说法，并且大都不是我想要的。泛型的优点就不多说了，作为一个编程语言的优秀特性，很多语言都支持泛型。在Java编码中泛型可以结合通配符来实现更多的扩展。
+"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+
+
+</head>
+
+    <body>
+        
+
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Justin&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                Stay Hungry & Stay Foolish
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+        <a href="/tags/" class="navbar-link">TagsCloud</a>
+    
+        <a href="/about/" class="navbar-link">About</a>
+    
+        <a href="/friends/" class="navbar-link">Friends</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    
+    
+
+
+<div class="post-container">
+    <div id="post-card" class="card">
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2"><xmp><? extend E> 和 <? super E> 深入理解</xmp></h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="John Doe's Avatar">
+        <span>2019-06-05</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/编程语言/">编程语言</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt;&url=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/&pic=http://zhaohaoren.top/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt;&url=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/&via=John Doe" target="_blank" rel="noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/" target="_blank" rel="noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/" target="_blank" rel="noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/&title=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Justin's Blog&title=Justin's Blog&summary=&pics=http://zhaohaoren.top/img/suka-favicon.ico&url=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/" target="_blank" rel="noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=http://zhaohaoren.top/2019/06/05/Java-泛型通配符/&text=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB3ElEQVR42u3awQ7CIBCE4b7/S+vVpOzM0HqA5e/FxGj5NBTYgeuz4HWBAgUK1AB1iUt95nbDwfvuHrd2QLVBDTtd0cDohgoz0w6oXqiqoarTj75f/YikHVBnoaoOqgZbhQMFqhrwqu86HKgzUKrh0Y3cxKw6/+tVAqjlUWpB/8/Xv1UzoJZG2dAhXPzNFK6vUxdQS6PcgOiKBfWAJAMuqL6oEUB16hSZFLSg+qEUQi3U0sWd+gGg+qFcw64ATQP+aJAG1QrlAvp0Q0g9MHZQBdUGlW4UVcVBBbAhGaiWqCeFZoJUny//AFAtUGknTcI016nVRgCoPihVMM5OtCo8iyZ1UC1QrniYLUrVfWyxC6oFSh0KdA0/CvDVBA2qBcod9EsObaWTsFoQguqDcgNcemhLFRnJIhBUL5TbvE7C/tmCNJqQQW2LSg5zJYHHzMMRD56gtkW5TWgX9kcBxkzhAGp7VHIwKw3XZg7pRE8fqK1Qb4pHt7CbKThA9UElB43TIjMNcePUBdS2qPTAjQ0owtAf1BmoZJPRhWjJprcKbkGdg3KNuQk6LlhBHYNSRYMCJId6Xj99oJZFuY1uF1qo4iEO4UC1QbkQIgljk5BMhbOg+qBWukCBAgXq5/oC04wQr0OD31sAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                            <div id="post-toc">
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主要疑惑点"><span class="post-toc-number">1.</span> <span class="post-toc-text">主要疑惑点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对这两个最基础的理解-结论-："><span class="post-toc-number">2.</span> <span class="post-toc-text">对这两个最基础的理解(结论)：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分析前需要知道"><span class="post-toc-number">3.</span> <span class="post-toc-text">分析前需要知道</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分析"><span class="post-toc-number">4.</span> <span class="post-toc-text">分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lt-extends-E-gt"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">&lt; ? extends E &gt;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lt-super-E-gt"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">&lt; ? super E &gt;</span></a></li></ol></li></ol>
+                            </div>
+                        
+                    
+                    <article id="post-content">
+                        <blockquote>
+<p>在读Java编程思想的时候，对泛型通配符的上下限定这块有点难以理解。其实平常我也没有用到过这个统配符，只是看着有点困惑便去网上搜了下，答案又各有说法，并且大都不是我想要的。泛型的优点就不多说了，作为一个编程语言的优秀特性，很多语言都支持泛型。在Java编码中泛型可以结合通配符来实现更多的扩展。</p>
+</blockquote>
+<a id="more"></a>
+<p>Java使用 “?” 在泛型参数中做通配符，作用在于：<strong>当前你不知道指定该容器是什么类型，你可以是?占位，表明将来在使用的时候你再指明类型去使用。</strong></p>
+<h1 id="主要疑惑点"><a href="#主要疑惑点" class="headerlink" title="主要疑惑点"></a>主要疑惑点</h1><p>Java使用通配符时候可以通过extends和super用来对将来指向容器的参数类型做限制： </p>
+<ul>
+<li>向下限定: ? extends E </li>
+<li>向上限定：? super E</li>
+</ul>
+<p>我起初最疑惑的地方是编译器如何知道对应的通配类型可以存放那些数据的。</p>
+<h1 id="对这两个最基础的理解-结论-："><a href="#对这两个最基础的理解-结论-：" class="headerlink" title="对这两个最基础的理解(结论)："></a>对这两个最基础的理解(结论)：</h1><ul>
+<li>&lt; ? extends E &gt;<pre><code>*  add： 不允许加入 **任何** 元素！
+*  get： 可以获取元素，但是必须使用 **E** 来接受元素！
+</code></pre></li>
+<li>&lt; ? super E &gt;<ul>
+<li>add: 允许添加 <strong>E和E的子类</strong> 元素！</li>
+<li>get: 可以获取元素，但是类的信息丢失了，所以返回<strong>只能使用Object引用</strong>来接受！如果需要自己的类型需要强制类型转换！</li>
+</ul>
+</li>
+</ul>
+<h1 id="分析前需要知道"><a href="#分析前需要知道" class="headerlink" title="分析前需要知道"></a>分析前需要知道</h1><p> 一定谨记： 编译器使用list的时候，只知道list的泛型参数范围(?,E]，至于他后面指向了什么编译器不知道，list自己是什么类型也不确定。 因为运行时候，不会再list上标记后面指向的ArrayList的类型，而是用一个capture#1来标记（原理我暂时还不知道）。<br> 由上，你使用list的时候，编译器所能获取的信息只有一个，list的泛型参数范围：(?,E] 或者 [E,?) 所以如果允许get或者add，为了安全一定要进行类型判断，保证类型安全！这些判断的依据来源也只有该参数范围！<br>     那么问题来了： 我只知道(?,E] 或者 [E,?)的范围，不知道后面ArrayList具体是什么？所以我做出的决策只能是规定：<strong>只允许 E的父类 或者 E的子类 的对象添加！</strong><br> （因为list不确定自己的类型，只知道自己的范围，所以它对应的可add对象的范围一定是这个泛型参数范围内无论取哪种类型都能保证add是类型安全的）。但是最终我们是要add进入ArrayList的，所以这个范围一定要ArrayList无论指定任何类型，都是类型安全的！</p>
+<p>实例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">        ArrayList&lt;C&gt; al = <span class="keyword">new</span> ArrayList&lt;C&gt;();</span><br><span class="line">        al.add(<span class="keyword">new</span> C());</span><br><span class="line">        List&lt;? extends A&gt; list = al;</span><br><span class="line"><span class="comment">//        list不允许加入任何元素</span></span><br><span class="line"><span class="comment">//        list.add(new A());</span></span><br><span class="line"><span class="comment">//        list.add(new B());</span></span><br><span class="line"><span class="comment">//        list.add(new C());</span></span><br><span class="line"><span class="comment">//        list可以获取元素，但是接受元素必须是A，是其他的会报错！</span></span><br><span class="line">        A a1 = list.get(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//        C c1 = list.get(0); 不可用C接受</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;? <span class="keyword">super</span> C&gt; list1 = <span class="keyword">new</span> ArrayList&lt;B&gt;();</span><br><span class="line"><span class="comment">//        list不允许加入C的父类元素</span></span><br><span class="line"><span class="comment">//        list1.add(new A());</span></span><br><span class="line"><span class="comment">//        list1.add(new B());</span></span><br><span class="line">        list1.add(<span class="keyword">new</span> C()); <span class="comment">//可以添加C和C的子类</span></span><br><span class="line"><span class="comment">//        list获取元素需要强制类型转换（或用Object接受），因为类信息使用list会被丢失</span></span><br><span class="line"><span class="comment">//        C c2 = list1.get(0);</span></span><br><span class="line">        C c2 = (C)list1.get(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>  
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="lt-extends-E-gt"><a href="#lt-extends-E-gt" class="headerlink" title="&lt; ? extends E &gt;"></a>&lt; ? extends E &gt;</h2><ul>
+<li>List &lt; ? extends A &gt; 表示 这个list里面存的是A的子类，具体是啥不知道，只知道范围！<ul>
+<li>那可以设定分两个范围： A子类，A父类。<ul>
+<li>对于add：<ul>
+<li>A子类情况：如果你允许add的元素是A的子类，那么因为泛型参数限定? extends A，所以ArrayList可以指定的类型也是A的子类，那么无法保证add的对象一定ArrayList指定类型的子类对象，比如： ArrayList指定C, list却add了A()对象–这就是非法的！（因为list并不知道指定了C，它可以确定的范围就是可以add所有A的子类。）所以A子类该范围不行！</li>
+<li>A父类情况：ArrayList指定类型肯定实在(?,A]范围内，所以这种情况肯定不行！</li>
+</ul>
+</li>
+<li>对于get:<ul>
+<li>list不知道你存入ArrayList是什么类型，但是我可以确定使用A的引用肯定可以接受ArrayList中的元素（无论ArrayList设定什么类型），因为A肯定是里面元素的父类！但是你使用其他类型接受就不行了，因为如果ArrayList的类型是你指定的那个类型的父类，是接受不了的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="lt-super-E-gt"><a href="#lt-super-E-gt" class="headerlink" title="&lt; ? super E &gt;"></a>&lt; ? super E &gt;</h2><ul>
+<li>List &lt; ? super C &gt; 表示list里面存的是C和其父类，具体是啥不确定，只知道范围。<ul>
+<li>同样的分为：C子类，C父类。（其实应该发现了没必要分为两类，有一类是肯定不行的）。<ul>
+<li>add：<ul>
+<li>C子类：如果允许add，就允许list来add任何C的子类元素，因为ArrayList指定的范围是C和其父类，所以ArrayList可以准确接受该假设范围的所有对象。 所以，C子类这个范围可行，这样就有一个标准的类型判断依据，不像extends，根本无法确定判断标准，编译器就不会知道怎么做。</li>
+<li>C父类：显然和上面A子类情况是一样的！因为list无法知道ArrayList指定类型 ，所以无法确定判断标准。</li>
+</ul>
+</li>
+<li>get:<ul>
+<li>因为list只允许add C的子子类对象，你或许也在想：那我直接用C不就可以接受ArrayList数据吗？并不是的，ArrayList在赋给list之前可能里面已经有值了，这个值的类型如果是ArrayList指定类型，并且是C的父类，那么C就无法接受！ 而且list不知道ArrayList会指定哪个类型，只知道范围，所以无法确定是哪个父类，所以干脆用Object那肯定就能接受了，所以返回的其实只有Object能接受，否则就得强转。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">其实最初我疑虑点就在为啥我不能限定他只添加ArrayList制定范围之后的那个呢?</span><br><span class="line">----原因很简单，编辑器使用list的时候不知道ArrayList是啥！</span><br><span class="line">后来又纳闷为啥super没毛病同样也不知道啊为啥可以add？</span><br><span class="line">----因为即便是super的时候，也是不知道的，super能add完全是靠常规逻辑判断！</span><br></pre></td></tr></table></figure>
+<p>文章很久前写的了，写的不好，现在我自己看也懵逼了 -。-|| 后期修正下吧!</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+        var dateUpdate = Date.parse("2019-06-05");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-06-05T11:53:29.000Z" itemprop="datePublished">2019-06-05</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+
+<a class="post-categories-list-item" href="/categories/编程语言/">编程语言</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+
+<a class="post-tags-list-item" href="/tags/Java/">#&nbsp;Java</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                
+<div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/06/05/ThreadLocal理解-结合连接池/">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">ThreadLocal理解-结合连接池</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/06/05/Java-finalize/">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Java中的finalize()方法</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span data-year></span>
+        <a class="footer-copyright-a" href="http://zhaohaoren.top">Justin&#39;s Blog</a>
+    </p>
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+            
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+        
+        
+        Supported by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="noopener">Suka</a>
+    </p>
+</footer>
+
+        
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+
+
+    /* Copyright */
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.querySelector('span[data-year]')
+    
+        copyrightContent.textContent = copyrightNow
+    
+
+
+
+/* Cnosole Log */
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.2 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+</script>
+
+<!-- vanilla-lazyload -->
+
+    <script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+    <!-- Busuanzi -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+
+
+
+<!-- gallery.js -->
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+
+    </body>
+
+</html>

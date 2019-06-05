@@ -61,7 +61,7 @@ window.oldVersion = [
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <!-- Title -->
-<title>分布式数据库 - Raft | Justin&#39;s Blog</title>
+<title>Java中的finalize()方法 | Justin&#39;s Blog</title>
 
 <!-- favicon -->
 <!-- Favicons -->
@@ -80,10 +80,10 @@ window.oldVersion = [
 <meta name="format-detection" content="telephone=no">
 
 <!-- Description -->
-<meta name="description" content="分布式数据库原理系列 之 Raft协议介绍">
+<meta name="description" content="Java中假定finalize的工作原理为：一旦垃圾回收器准备回收内存而释放对象所占内存的时候，会先调用该对象的finalize方法，然后在下一次再需要垃圾回收的时候才真正的回收对象！">
 
 <!-- Keywords -->
-<meta name="keywords" content=", 分布式系统, 一致性协议">
+<meta name="keywords" content=", Java">
 
 <!-- Disable Fucking Bloody Baidu Tranformation -->
 <meta http-equiv="Cache-Control" content="no-transform">
@@ -205,24 +205,24 @@ window.oldVersion = [
 
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="分布式数据库 - Raft | Justin&#39;s Blog">
+    <meta property="og:title" content="Java中的finalize()方法 | Justin&#39;s Blog">
 <meta property="og:site_name" content="Justin&#39;s Blog">
 
 
 
-<meta property="og:url" content="http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/">
+<meta property="og:url" content="http://zhaohaoren.top/2019/06/05/Java-finalize/">
 <meta property="og:image" content="http://zhaohaoren.top/img/suka-favicon.ico">
 
-<meta property="og:description" content="分布式数据库原理系列 之 Raft协议介绍">
+<meta property="og:description" content="Java中假定finalize的工作原理为：一旦垃圾回收器准备回收内存而释放对象所占内存的时候，会先调用该对象的finalize方法，然后在下一次再需要垃圾回收的时候才真正的回收对象！">
 
 <meta name="twitter:card" content="summary">
 
 
     <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2019-03-06T06:24:09.000Z">
-    <meta property="article:modified_time" content="2019-03-06T06:24:09.000Z">
+    <meta property="article:published_time" content="2019-06-05T08:16:23.000Z">
+    <meta property="article:modified_time" content="2019-06-05T08:16:23.000Z">
     <meta property="article:author" content="John Doe">
-    <meta property="og:article:tag" content=", 分布式系统, 一致性协议"> 
+    <meta property="og:article:tag" content=", Java"> 
 
 
 
@@ -239,7 +239,7 @@ window.oldVersion = [
 
 
     <!-- ### Canonical link ### -->
-    <link rel="canonical" href="http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/">
+    <link rel="canonical" href="http://zhaohaoren.top/2019/06/05/Java-finalize/">
 
     <!-- ### Structured Data ### -->
     
@@ -249,22 +249,22 @@ window.oldVersion = [
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
-    "url": "http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/",
+    "url": "http://zhaohaoren.top/2019/06/05/Java-finalize/",
     "@type": "BlogPosting",
     "logo": "http://zhaohaoren.top/img/suka-favicon.ico",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/"
+        "@id": "http://zhaohaoren.top/2019/06/05/Java-finalize/"
     },
-    "headline": "分布式数据库 - Raft | Justin&#39;s Blog",
+    "headline": "Java中的finalize()方法 | Justin&#39;s Blog",
     
     "image": {
         "@type": "ImageObject",
         "url": "http://zhaohaoren.top/img/suka-favicon.ico"
     },
     
-    "datePublished": "2019-03-06T06:24:09.000Z",
-    "dateModified": "2019-06-05T08:09:39.305Z",
+    "datePublished": "2019-06-05T08:16:23.000Z",
+    "dateModified": "2019-06-05T11:48:10.253Z",
     "author": {
         "@type": "Person",
         "name": "John Doe",
@@ -289,8 +289,8 @@ window.oldVersion = [
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": ", 分布式系统, 一致性协议",
-    "description": "分布式数据库原理系列 之 Raft协议介绍"
+    "keywords": ", Java",
+    "description": "Java中假定finalize的工作原理为：一旦垃圾回收器准备回收内存而释放对象所占内存的时候，会先调用该对象的finalize方法，然后在下一次再需要垃圾回收的时候才真正的回收对象！"
 }
 </script>
 
@@ -355,7 +355,7 @@ window.oldVersion = [
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">分布式数据库 - Raft</h1>
+    <h1 class="card-title h3 mb-2">Java中的finalize()方法</h1>
 
 
 
@@ -363,10 +363,10 @@ window.oldVersion = [
 <div class="post-header-info">
     <p class="post-header-info-left text-gray">
         <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="John Doe's Avatar">
-        <span>2019-03-06</span>
+        <span>2019-06-05</span>
         
             <span class="suka-devide-dot"></span>
-            <a class="category-link" href="/categories/一致性协议/">一致性协议</a>
+            <a class="category-link" href="/categories/编程语言/">编程语言</a>
         
         
             <!-- Busuanzi Post Views -->
@@ -387,56 +387,56 @@ window.oldVersion = [
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=分布式数据库 - Raft&url=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/&pic=http://zhaohaoren.top/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="noopener noreferrer nofollow">Share to Weibo</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=Java中的finalize()方法&url=http://zhaohaoren.top/2019/06/05/Java-finalize/&pic=http://zhaohaoren.top/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="noopener noreferrer nofollow">Share to Weibo</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=分布式数据库 - Raft&url=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/&via=John Doe" target="_blank" rel="noopener noreferrer nofollow">Share to Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=Java中的finalize()方法&url=http://zhaohaoren.top/2019/06/05/Java-finalize/&via=John Doe" target="_blank" rel="noopener noreferrer nofollow">Share to Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/" target="_blank" rel="noopener noreferrer nofollow">Share to Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://zhaohaoren.top/2019/06/05/Java-finalize/" target="_blank" rel="noopener noreferrer nofollow">Share to Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/" target="_blank" rel="noopener noreferrer nofollow">Share to Google+</a>
+        <a href="https://plus.google.com/share?url=http://zhaohaoren.top/2019/06/05/Java-finalize/" target="_blank" rel="noopener noreferrer nofollow">Share to Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/&title=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://zhaohaoren.top/2019/06/05/Java-finalize/&title=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Justin's Blog&title=Justin's Blog&summary=&pics=http://zhaohaoren.top/img/suka-favicon.ico&url=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/" target="_blank" rel="noopener noreferrer nofollow"> Share to QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Justin's Blog&title=Justin's Blog&summary=&pics=http://zhaohaoren.top/img/suka-favicon.ico&url=http://zhaohaoren.top/2019/06/05/Java-finalize/" target="_blank" rel="noopener noreferrer nofollow"> Share to QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=http://zhaohaoren.top/2019/03/06/分布式数据库-Raft/&text=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to Telegram</a>
+        <a href="https://t.me/share/url?url=http://zhaohaoren.top/2019/06/05/Java-finalize/&text=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to Telegram</a>
     </li>
     
 
     <!-- QRCode -->
     
     <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB00lEQVR42u3ay5KDMAxEUf7/p5MtoezulsMCi8smU8mAD1V+SdbxeeB1gAIFCtQAdYjr/D+jv38eeLrn+hm3A6oNataI+y55iUo7oHqhrg8ffT/6PW3UtQMKlJokFRoUKIVzA8C9JKjeKDXpjTq42wQmizSovqik497xeVs0A+rRKJt0uABVwDkbGLdnXUA9GpVs5lSSozJA1PNB9UElHXuGmN07ArrNH6g+KLW5rwwGtyBHm0dQLVAqwZVOkLOAYhZ8ljZ5oLZEuYclB0Bp0CAHFKg2qKRTuoS+wv8VjILaErVy4LiSiFWLMag+qGRTrybXlWKJuAAH1LaoZDJMgk8VIERwUC1Q6eGQW5yTgySFA9UH5Qr/0oOfCm76UqBaodzkmCbHbGeuVnCA2hLlEvJJQ2mAKoNbUG1QaadPD7DdhFuqCgK1NSop4nILuJt0ZfIXVDtUkthwBYWVIhxQ/VGrCS+1oKcFOqD6oJJCQdWpk8PMv4olQG2HSg4H3cJbTZBECQ5QW6NWFtqkgNAl/UH1RiVFMgloJXEL6r2olU6dbPxAvQ+VbPaS+21wCqoVygUMSTJfFeYsTZ6gtkW5RET6exLYyhcC1QL1pAsUKFCgTtcXkGbQ4EbyJB8AAAAASUVORK5CYII=" alt="QRCode">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB50lEQVR42u3au47DMAxEUf//TyetEYgzw8CFRF832ewuolMo4kvXZ8PnAgUKFKgF6hLP/e/2Axf/d3/v1gE1C1Ut8vv6u4hafPWzWgfUPNRqg682crlJBTpdB9Q7UOoQTRCgQKnDrtrg7jAF9U6UCpTuw5Ng/WiWAGp7lCscnnp9tJoBtS2qW2S6AlMVp491XUBtjaoKR5fUqWDcCdJRlgDqOFSFUBtfLeIab9VaoGag3CavCogkKWxjQY1AqSaFStrSZpktQEGNQ6XBOD1EqyRQvQc1C5UMhlRx2mnI2iQS1BiUGg4lm78KvCqRjDJPUEeikuQtLULTwB4VDqCORakmRXIJx31JOgEf1AyUuzSjArL7vStA25knqGNQLrn759JWMsS0JzqoI1Eu4KrCQjVx0wG4bO6DOhKVDH7cAFL9PRlsgpqF6hQGDuWGkPYyGKgRqM4g0S3uCgQ7GAA1BpU09N0HpgNKeeCCGoFKmqtJkdAtTuPBNqjjUOmFG9ucMIepC9ig5qDSJpc7WJMAbQeWoMagOoPF5IDsFiWgZqLcxSs3AHeN3OjSBahXoNwwsnPBRjV6Qb0LlQywk1d7+RDUKJRrSnQuQ6QDgL8bHKC2RyWB021696Vxg29Qc1A7PaBAgQJ1e76RuE9+D9WcOAAAAABJRU5ErkJggg==" alt="QRCode">
     </li>
     
 
@@ -449,17 +449,38 @@ window.oldVersion = [
                 <div class="card-body">
                     
                         
-                            <div id="post-toc">
-                                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li></ol>
-                            </div>
-                        
                     
                     <article id="post-content">
-                        <p>分布式数据库原理系列 之 Raft协议介绍<br><a id="more"></a></p>
+                        <p>Java中假定finalize的工作原理为：一旦垃圾回收器准备回收内存而释放对象所占内存的时候，会先调用该对象的finalize方法，然后在下一次再需要垃圾回收的时候才真正的回收对象！</p>
+<a id="more"></a>
 <blockquote>
-<p>过去, Paxos一直是分布式协议的标准，但是Paxos难于理解，更难以实现，Google的分布式锁系统Chubby作为Paxos实现曾经遭遇到很多坑。</p>
+<p>finalize方法的作用：<br>日常开发中我们不需要也不建议同时也没意义去主动调用finalize方法。由JVM管理的内存交给GC来管理即可。<br>finalize的目的主要用于一些特殊内存：比如使用JNI调用中申请的特殊内存等。<br>finalize用于在GC发生前事先调用去回收JNI调用中申请的特殊内存，下次GC发生时候保证GC后所有该对象的内存都释放了。</p>
 </blockquote>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1>
+<p><strong>再看垃圾回收</strong></p>
+<ul>
+<li>Java的垃圾回收器只会释放由我们new出来的内存堆块，那些不是由new出来的“特殊内存”，垃圾回收器是不会管理的。</li>
+<li>所谓的特殊内存指通过JNI用C/C++向系统申请的内存，这些内存如果不手动去清除就会一直占据在内存中。</li>
+<li>而且，垃圾回收本身就有开销，所以虚拟机不会经常GC，只有当内存快要耗尽的时候JVM才会触发GC。</li>
+</ul>
+<p><strong>finalize()</strong></p>
+<ul>
+<li><strong>由上，Java中的对象并不一定会被全部垃圾回收，当你不想要该对象的时候，你需要手动去处理那些“特殊内存”，java中没有析构，所以提供了一个finalize()方法让我们来执行清理工作。</strong></li>
+<li>当系统进行GC的时候会先调用finalize方法，然后再下次才会回收对象的内存。因为native中申请的内存，GC没有办法回收所以finalize被用来做垃圾回前的重要清理工作：释放特殊内存。</li>
+<li><strong>所以finalize一般使用在使用了JNI的情景下，需要在finalize中调用native方法释放特殊内存，一般情况下不要使用finalize！</strong></li>
+<li>如果GC不发生那么finalize也不会发生，finalize是Object的protect方法，不可以在类族外访问。</li>
+</ul>
+<p><strong>对比析构函数</strong></p>
+<ul>
+<li>首先，它不是析构函数。Java因为有GC机制，所以没有析构函数的概念！</li>
+<li>finalize不是C++中的析构函数：析构函数肯定是会销毁该对象的，但是finalize因为gc机制不会经常发生，所以其被执行的是不确定的。（不知道是不是我没理解透，没觉得这两个有什么可比性，一个主动发生一个被动发生）</li>
+</ul>
+<p><strong>其他</strong></p>
+<ul>
+<li>调用System.gc()，可以强制让gc发生来触发finalize方法！但是GC也只是GC垃圾的对象（没有被引用的），非垃圾的对象的finalize不会被调用。程序终止和GC不是一个概念。</li>
+<li>正常情况下你调用finalize(）都是直接super.finalize()使用父类的就行了。</li>
+<li>finalize一般不用！被执行的不确定性太大。不要指望使用finalize来回收你的对象，它只会在系统进行GC的时候清理特殊内存，不受你的控制！</li>
+</ul>
+
                     </article>
                     
 
@@ -479,9 +500,7 @@ window.oldVersion = [
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-03-06T06:24:09.000Z" itemprop="datePublished">2019-03-06</time>
-
-    , Updated at&nbsp;<time datetime="2019-06-05T08:09:39.305Z" itemprop="dateModified">2019-06-05</time>
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-06-05T08:16:23.000Z" itemprop="datePublished">2019-06-05</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
@@ -489,7 +508,7 @@ window.oldVersion = [
 <span class="post-categories-list mt-2">
 
 
-<a class="post-categories-list-item" href="/categories/一致性协议/">一致性协议</a>
+<a class="post-categories-list-item" href="/categories/编程语言/">编程语言</a>
 
 </span>
 
@@ -498,9 +517,7 @@ window.oldVersion = [
 <span class="post-tags-list mt-2">
 
 
-<a class="post-tags-list-item" href="/tags/分布式系统/">#&nbsp;分布式系统</a>
-
-<a class="post-tags-list-item" href="/tags/一致性协议/">#&nbsp;一致性协议</a>
+<a class="post-tags-list-item" href="/tags/Java/">#&nbsp;Java</a>
 
 </span>
 
@@ -514,9 +531,9 @@ window.oldVersion = [
     <!-- Prev Nav -->
     
         <li class="page-item page-prev">
-            <a href="/2019/03/06/分布式数据库-Paxos/">
+            <a href="/2019/06/05/Java-泛型通配符/">
                 <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">分布式数据库 - Paxos</div>
+                <div class="page-item-subtitle">&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt;</div>
             </a>
         </li>
     
@@ -524,9 +541,9 @@ window.oldVersion = [
     <!-- Next Nav -->
     
         <li class="page-item page-next">
-            <a href="/2019/03/06/设计模式-单例模式/">
+            <a href="/2019/06/05/2019-规划/">
                 <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">设计模式 - 单例模式</div>
+                <div class="page-item-subtitle">2018总结-2019展望</div>
             </a>
         </li>
     

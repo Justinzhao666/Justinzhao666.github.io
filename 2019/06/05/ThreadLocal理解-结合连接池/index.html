@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html >
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+        Version: 1.3.2
+    -->
+    <script>
+window.lsVersion = "1.3.2",
+window.oldVersion = [
+    
+        
+            "0.2.0","0.0.1","0.1.0","1.0.0","1.0.1","1.1.0","1.1.1","1.2.0","1.3.0"
+        
+    
+]
+</script>
+
+    <!-- ### DNS Prefetch ### -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+
+    <!-- ### Preload ### -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<!-- Title -->
+<title>ThreadLocal理解-结合连接池 | Justin&#39;s Blog</title>
+
+<!-- favicon -->
+<!-- Favicons -->
+
+    <link rel="shortcut icon" type="image/ico" href="/img/suka-favicon.ico">
+
+
+
+
+
+
+<!-- Android Chrome Color -->
+
+
+
+<meta name="format-detection" content="telephone=no">
+
+<!-- Description -->
+<meta name="description" content="本想看看博客理解下ThreadLocal，看了几篇看的似懂非懂，还看出一堆疑问。从很多博客中也看出了ThreadLocal感觉没表面那么简单，但是表述貌似也不好。">
+
+<!-- Keywords -->
+<meta name="keywords" content=", Java">
+
+<!-- Disable Fucking Bloody Baidu Tranformation -->
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+    <!-- ### Import File ### -->
+    
+        <!-- spectre.css -->
+
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css">
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style>
+
+<!-- style.css -->
+
+    <link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    
+        <link rel="stylesheet" href="/css/highlight/github.min.css">
+    
+
+
+
+    
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <!-- ### RSS ### -->
+    
+
+    <!-- ### WebApp ### -->
+    <meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Justin&#39;s Blog">
+<meta name="msapplication-starturl" content="http://zhaohaoren.top">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Justin&#39;s Blog">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Manifest Import -->
+
+<!-- Open Search -->
+
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="ThreadLocal理解-结合连接池 | Justin&#39;s Blog">
+<meta property="og:site_name" content="Justin&#39;s Blog">
+
+
+
+<meta property="og:url" content="http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/">
+<meta property="og:image" content="http://zhaohaoren.top/img/suka-favicon.ico">
+
+<meta property="og:description" content="本想看看博客理解下ThreadLocal，看了几篇看的似懂非懂，还看出一堆疑问。从很多博客中也看出了ThreadLocal感觉没表面那么简单，但是表述貌似也不好。">
+
+<meta name="twitter:card" content="summary">
+
+
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-06-05T12:40:38.000Z">
+    <meta property="article:modified_time" content="2019-06-05T12:40:38.000Z">
+    <meta property="article:author" content="John Doe">
+    <meta property="og:article:tag" content=", Java"> 
+
+
+
+
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/">
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/",
+    "@type": "BlogPosting",
+    "logo": "http://zhaohaoren.top/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/"
+    },
+    "headline": "ThreadLocal理解-结合连接池 | Justin&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://zhaohaoren.top/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2019-06-05T12:40:38.000Z",
+    "dateModified": "2019-06-05T12:42:26.778Z",
+    "author": {
+        "@type": "Person",
+        "name": "John Doe",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://zhaohaoren.top/img/default_avatar.png"
+        },
+        "description": "Stay Hungry & Stay Foolish"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Justin&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://zhaohaoren.top/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://zhaohaoren.top/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": ", Java",
+    "description": "本想看看博客理解下ThreadLocal，看了几篇看的似懂非懂，还看出一堆疑问。从很多博客中也看出了ThreadLocal感觉没表面那么简单，但是表述貌似也不好。"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+
+
+</head>
+
+    <body>
+        
+
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Justin&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                Stay Hungry & Stay Foolish
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+        <a href="/tags/" class="navbar-link">TagsCloud</a>
+    
+        <a href="/about/" class="navbar-link">About</a>
+    
+        <a href="/friends/" class="navbar-link">Friends</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    
+    
+
+
+<div class="post-container">
+    <div id="post-card" class="card">
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">ThreadLocal理解-结合连接池</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="John Doe's Avatar">
+        <span>2019-06-05</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/编程语言/">编程语言</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=ThreadLocal理解-结合连接池&url=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/&pic=http://zhaohaoren.top/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=ThreadLocal理解-结合连接池&url=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/&via=John Doe" target="_blank" rel="noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/" target="_blank" rel="noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/" target="_blank" rel="noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/&title=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Justin's Blog&title=Justin's Blog&summary=&pics=http://zhaohaoren.top/img/suka-favicon.ico&url=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/" target="_blank" rel="noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=http://zhaohaoren.top/2019/06/05/ThreadLocal理解-结合连接池/&text=Justin's Blog" target="_blank" rel="noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKQAAACkCAAAAAA83tqdAAACJ0lEQVR42u2ay1LDQAwE8/8/DddU8M5DQBGs9iUFdnbbLksZjfT4+AfHA0gggQTyDSAf4ng9//z3lwUP55///3q92hfI3ZCXL22w6dWNvF579d1kXyCBvAoQ9fK7ADrBX30e9wUSyOliRZBVDwdIIAXEKVCUeEgDCEggG4FxOqcEhRPFP66CgLwdpCvEfuvzR6tFIG8DaU0jYRQ0wtYF47dcNSBvBemKfZWklZhVxVksmoFcC5kYSS4Rp0IkNbSABNIJ2kmSbsWFbTYBuQbSJV61QVK8yeBQgQrkWkgnLqZwzuy3yR3IlZCJiD0J2UQYOyNANfyB3AuZNj0nBkHyw3BcF8i1kBMDPwmgdnjkaOwDuQ5SiQgVTJPrVfEHJJAqOTvzoBW0k+YpkEDWQ5hh0lZiOhK9QK6FTA18Z642DQN5I0CuhhwXS4XhpeAjgQHkCkgFqwos21A3sFGzCsiVkM6YOiX3RnSkDVYggVSCojX7kyBLmllAApk0nVzB3zRK0+ETIHdDVi9zKCSUqZAWY0DuhkxFbJLA23PHxhOQKyGng5oqINKGvn0IQK6EbIRC0uy0oiEcXAISyATaCddEVLjv1tMsQN4Osh68DIzRxkyV5haQayEbYdEk9MkgPZBApps3i7ubT819IIFsm+nJcIlbSz4cIIEMm+hN435qugIJpCqY0gH3RJBUhj+QayFdITYpyFwDIBoqAXIl5DsfQAIJJJB/eHwCGdD1ZARqB5AAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                            <div id="post-toc">
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ThreadLocal和Thread关系"><span class="post-toc-number">1.</span> <span class="post-toc-text">ThreadLocal和Thread关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#源码："><span class="post-toc-number">2.</span> <span class="post-toc-text">源码：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#set方法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">set方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#get方法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">get方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#先理清下ThreadLocal的作用到底是什么？"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">先理清下ThreadLocal的作用到底是什么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连接池的应用"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">连接池的应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#始终记得："><span class="post-toc-number">2.5.</span> <span class="post-toc-text">始终记得：</span></a></li></ol></li></ol>
+                            </div>
+                        
+                    
+                    <article id="post-content">
+                        <p>本想看看博客理解下ThreadLocal，看了几篇看的似懂非懂，还看出一堆疑问。从很多博客中也看出了ThreadLocal感觉没表面那么简单，但是表述貌似也不好。</p>
+<a id="more"></a>
+<h2 id="ThreadLocal和Thread关系"><a href="#ThreadLocal和Thread关系" class="headerlink" title="ThreadLocal和Thread关系"></a>ThreadLocal和Thread关系</h2><p>先来图说话（说半天源码真不如来张图）</p>
+<p><img src="http://img.blog.csdn.net/20171107163254061?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSnVzdGluX3poYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>上面图描述Thread和ThreadLocal之间的关系，从此就能得出很多基础结论了：</p>
+<ul>
+<li>线程内部持有一个Map存放着自己的局部变量，这些变量的key是ThreadLocal对象（可以理解为什么叫做线程局部变量了吧）；</li>
+<li>有一个变量想放入线程的局部变量的你就需要创建一个ThreadLocal对象；</li>
+<li>ThreadLocal本身没有什么存储结构，只是提供了方法，所以变量不是存在ThreadLocal中的，ThreadLocal负责搬运。</li>
+</ul>
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><p>就两个重要方法：</p>
+<h3 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void set(T value) &#123;</span><br><span class="line"> //获取当前线程，然后获取到当前线程里面的ThreadLocalMap引用，</span><br><span class="line"> //判断当前线程里面是创建该Map对象，有则直接set，没有就初始化一个Map,再将值放入。</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    if (map != null)</span><br><span class="line">        map.set(this, value);// 以ThreadLocal对象为key 传入value为value</span><br><span class="line">    else</span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public T get() &#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    //存在Map就找到当前线程Map中该ThreadLocal对象的value</span><br><span class="line">    if (map != null) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(this);</span><br><span class="line">        if (e != null) &#123;</span><br><span class="line">            @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //没有就初始化它</span><br><span class="line">    return setInitialValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ThreadLocal不是用来解决对象共享访问问题的，而主要是提供了线程保持对象的方法和避免参数传递的方便的对象访问方式 （网上一段话，我没看明白，但是我知道作者想表达的get到的那个点，并且很有道理的样子）连接：<a href="http://www.iteye.com/topic/103804" target="_blank" rel="noopener">文章</a></p>
+</blockquote>
+<h3 id="先理清下ThreadLocal的作用到底是什么？"><a href="#先理清下ThreadLocal的作用到底是什么？" class="headerlink" title="先理清下ThreadLocal的作用到底是什么？"></a>先理清下ThreadLocal的作用到底是什么？</h3><p>它并不是为了自带了线程安全，并发控制这些机制，它是通过牺牲空间（创建额外更多的对象来），它的目的仅仅就是为了让线程使用自己的变量。—让同一个线程上的所有代码块都是使用的该变量。<br>就拿数据库连接来说，如果没有使用ThreadLocal，那么势必我们会定义的一个数据库Connection，然后所有的线程共享它！但是这样是线程不安全的（connection控制着事物，会导致事物混乱）！那么我们就需要同步，但是同步是很耗性能的。所以使用ThreadLocal，可以理解为为每一个线程都创建一个Connection对象（当然实际不会这样）。这个Conncetion对象只被该线程使用。–所以，不是说有一个共享变量我们为了让他线程安全就将该变量放入ThreadLocal中就安全了，这样其实还是不安全的因为引用传递，ThreadLocal做法是为每个线程创建一个对象。<br>这本身就是一种空间换时间的机制，没有什么屌的优化机制在里面。</p>
+<p>那你或许又问 这有什么用？<br>空间换时间– 我们不需要使用同步块了，线程的局部中存的每个对象都是不一样的，所以不会有线程安全问题。所以之前不理解的将一个变量引用传入到ThreadLocal中这种场景本身对于ThreadLocal来讲没有意义，也就是说ThreadLocal不是用来干这个的（看了好多博客写着的意思就是讲一个Connection放入到ThreadLocal中就线程安全了？开玩笑！）</p>
+<h3 id="连接池的应用"><a href="#连接池的应用" class="headerlink" title="连接池的应用"></a>连接池的应用</h3><p>第一次接触这个就是因为连接池</p>
+<h3 id="始终记得："><a href="#始终记得：" class="headerlink" title="始终记得："></a>始终记得：</h3><p>ThreadLocal 将一些线程不安全的变量，将用同步的方式转为为每个线程创建一个对象来实现线程安全。</p>
+<p>文章也是自己理解的，可能有不对的地方，请指正。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+        var dateUpdate = Date.parse("2019-06-05");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-06-05T12:40:38.000Z" itemprop="datePublished">2019-06-05</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+
+<a class="post-categories-list-item" href="/categories/编程语言/">编程语言</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+
+<a class="post-tags-list-item" href="/tags/Java/">#&nbsp;Java</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                
+<div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/06/05/linux中的source命令和直接执行脚本的区别/">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">linux中的source命令和直接执行脚本的区别</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/06/05/Java-泛型通配符/">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">&lt;xmp&gt;&lt;? extend E&gt; 和 &lt;? super E&gt; 深入理解&lt;/xmp&gt;</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span data-year></span>
+        <a class="footer-copyright-a" href="http://zhaohaoren.top">Justin&#39;s Blog</a>
+    </p>
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+            
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+        
+        
+        Supported by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="noopener">Suka</a>
+    </p>
+</footer>
+
+        
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+
+
+    /* Copyright */
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.querySelector('span[data-year]')
+    
+        copyrightContent.textContent = copyrightNow
+    
+
+
+
+/* Cnosole Log */
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.2 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+</script>
+
+<!-- vanilla-lazyload -->
+
+    <script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+    <!-- Busuanzi -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+
+
+
+<!-- gallery.js -->
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+
+    </body>
+
+</html>
